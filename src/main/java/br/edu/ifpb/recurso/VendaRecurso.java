@@ -1,6 +1,7 @@
 package br.edu.ifpb.recurso;
 
 import br.edu.ifpb.entidade.Venda;
+import br.edu.ifpb.recurso.modelo.ModeloVenda;
 import br.edu.ifpb.servico.ServicoVenda;
 import javax.ws.rs.container.ResourceContext;
 
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
@@ -24,23 +26,30 @@ public class VendaRecurso {
     private ServicoVenda servico;
 
     @GET
-    public Response todosAsVendas() {
+    public Response todosAsVendas(@Context UriInfo info) {
         List<Venda> vendas = servico.todos();
         if (vendas == null || vendas.isEmpty()) {
             return Response.status(Response.Status.NO_CONTENT).build();
         }
-        GenericEntity resposta = new GenericEntity<List<Venda>>(vendas) {};
+
+        List<ModeloVenda> modeloVenda = new ArrayList<>();
+        vendas.stream().forEach((venda) -> {
+            modeloVenda.add(new ModeloVenda(info, venda));
+        });
+
+        GenericEntity resposta = new GenericEntity<List<ModeloVenda>>(modeloVenda) {};
         return Response.ok().entity(resposta).build();
     }
 
     @GET
     @Path("{id}")
-    public Response recuperarVenda(@PathParam("id") long id) {
+    public Response recuperarVenda(@Context UriInfo info, @PathParam("id") long id) {
         Venda venda = servico.recuperar(id);
         if (venda == null) {
             return Response.status(Response.Status.NO_CONTENT).build();
         }
-        return Response.ok().entity(venda).build();
+        ModeloVenda modelo = new ModeloVenda(info, venda);
+        return Response.ok().entity(modelo).build();
     }
 
     @POST
