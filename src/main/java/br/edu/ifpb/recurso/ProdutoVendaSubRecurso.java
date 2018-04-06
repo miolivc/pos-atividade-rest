@@ -12,7 +12,6 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Stateless
 @Path("/")
@@ -26,11 +25,11 @@ public class ProdutoVendaSubRecurso {
 
     @GET
     public Response todosOsProdutos(@PathParam("id") long id) {
-        List<Produto> produtos = servico.recuperar(id).getProdutos();
-        if (produtos == null || produtos.isEmpty()) {
+        List<Produto> prods = servico.recuperar(id).getProdutos();
+        if (prods == null || prods.isEmpty()) {
             return Response.status(Response.Status.NO_CONTENT).build();
         }
-        GenericEntity resposta = new GenericEntity<List<Produto>>(produtos) {};
+        GenericEntity resposta = new GenericEntity<List<Produto>>(prods) {};
         return Response.ok().entity(resposta).build();
     }
 

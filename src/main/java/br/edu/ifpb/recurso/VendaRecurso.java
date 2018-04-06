@@ -75,7 +75,7 @@ public class VendaRecurso {
         return Response.status(204).build();
     }
 
-    @Path("{id}/produto")
+    @Path("{id}/produtos")
     public ProdutoVendaSubRecurso produtosDaVenda() {
         return resourceContext.getResource(ProdutoVendaSubRecurso.class);
     }
