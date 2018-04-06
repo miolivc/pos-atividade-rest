@@ -56,7 +56,8 @@ public class VendaRecurso {
     @POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response criarVenda(@Context UriInfo info, Venda venda) {
+    public Response criarVenda(@Context UriInfo info) {
+        Venda venda = new Venda();
         String id = String.valueOf(servico.adicionar(venda).getId());
         URI path = info.getAbsolutePathBuilder().path("venda").path(id).build();
         return Response.created(path).build();

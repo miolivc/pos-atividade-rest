@@ -11,7 +11,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 @Stateless
-@Path("/")
 public class ClienteVendaSubRecurso {
 
     @Inject

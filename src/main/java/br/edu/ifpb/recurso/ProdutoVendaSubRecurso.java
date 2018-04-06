@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Stateless
-@Path("/")
+//@Path("/")
 public class ProdutoVendaSubRecurso {
 
     @Inject

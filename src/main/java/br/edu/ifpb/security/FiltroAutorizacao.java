@@ -6,12 +6,11 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 import java.io.*;
-import java.util.Map;
 
 @Provider
 public class FiltroAutorizacao implements ContainerRequestFilter {
 
-    private File usuarios = new File("usuarios.txt");
+    private File usuarios = new File("/home/miolivc/Development/pos-atividade-rest/src/main/resources/usuarios.txt");
     private boolean autenticado = false;
 
     @Override

@@ -1,7 +1,7 @@
 package br.edu.ifpb.recurso;
 
+import br.edu.ifpb.configuracao.AppLogger;
 import br.edu.ifpb.security.AutorizacaoBasic;
-
 import javax.ejb.Stateless;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -10,13 +10,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.*;
+import javax.interceptor.Interceptors;
 
 @Stateless
 @Path("usuario")
+@Interceptors(AppLogger.class)
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class UsuarioRecurso {
 
-    private File usuarios = new File("src/main/resources/usuarios.txt");
+    private File usuarios = new File("/home/miolivc/Development/pos-atividade-rest/src/main/resources/usuarios.txt");
 
     @POST
     public Response criarUsuario(@FormParam("email") String email,
