@@ -2,6 +2,7 @@ package br.edu.ifpb.recurso;
 
 import br.edu.ifpb.entidade.Venda;
 import br.edu.ifpb.servico.ServicoVenda;
+import javax.ws.rs.container.ResourceContext;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -14,6 +15,10 @@ import java.util.List;
 @Path("venda")
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class VendaRecurso {
+
+
+    @Context
+    private ResourceContext resourceContext;
 
     @Inject
     private ServicoVenda servico;
@@ -59,5 +64,15 @@ public class VendaRecurso {
     public Response apagarVenda(Venda venda) {
         servico.remover(venda);
         return Response.status(204).build();
+    }
+
+    @Path("{id}/produto")
+    public ProdutoVendaSubRecurso produtosDaVenda() {
+        return resourceContext.getResource(ProdutoVendaSubRecurso.class);
+    }
+
+    @Path("{id}/cliente")
+    public ClienteVendaSubRecurso clienteDaVenda() {
+        return resourceContext.getResource(ClienteVendaSubRecurso.class);
     }
 }
