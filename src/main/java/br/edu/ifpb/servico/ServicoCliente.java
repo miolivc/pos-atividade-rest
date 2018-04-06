@@ -1,4 +1,4 @@
-package br.edu.ifpb.servicos;
+package br.edu.ifpb.servico;
 
 import br.edu.ifpb.entidade.Cliente;
 import br.edu.ifpb.repositorio.Clientes;

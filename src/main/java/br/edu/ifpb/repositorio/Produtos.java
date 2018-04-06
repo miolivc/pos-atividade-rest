@@ -13,8 +13,9 @@ public class Produtos {
     @PersistenceContext
     private EntityManager manager;
 
-    public void adicionar(Produto produto) {
+    public Produto adicionar(Produto produto) {
         manager.persist(produto);
+        return produto;
     }
 
     public void remover(Produto produto) {

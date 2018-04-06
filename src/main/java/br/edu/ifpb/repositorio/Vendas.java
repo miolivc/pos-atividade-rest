@@ -12,8 +12,9 @@ public class Vendas {
     @PersistenceContext
     private EntityManager manager;
 
-    public void adicionar(Venda venda) {
+    public Venda adicionar(Venda venda) {
         manager.persist(venda);
+        return venda;
     }
 
     public void remover(Venda venda) {

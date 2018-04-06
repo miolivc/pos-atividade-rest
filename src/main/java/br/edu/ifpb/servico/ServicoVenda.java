@@ -1,4 +1,4 @@
-package br.edu.ifpb.servicos;
+package br.edu.ifpb.servico;
 
 import br.edu.ifpb.entidade.Venda;
 import br.edu.ifpb.repositorio.Vendas;
@@ -13,8 +13,8 @@ public class ServicoVenda {
     @Inject
     private Vendas vendas;
 
-    public void adicionar(Venda venda) {
-        vendas.adicionar(venda);
+    public Venda adicionar(Venda venda) {
+        return vendas.adicionar(venda);
     }
 
     public void remover(Venda venda) {

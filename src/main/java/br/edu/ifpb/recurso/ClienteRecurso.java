@@ -1,7 +1,7 @@
 package br.edu.ifpb.recurso;
 
 import br.edu.ifpb.entidade.Cliente;
-import br.edu.ifpb.servicos.ServicoCliente;
+import br.edu.ifpb.servico.ServicoCliente;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -26,6 +26,16 @@ public class ClienteRecurso {
         }
         GenericEntity resposta = new GenericEntity<List<Cliente>>(clientes) {};
         return Response.ok().entity(resposta).build();
+    }
+
+    @GET
+    @Path("{cpf}")
+    public Response recuperarCliente(@PathParam("cpf") String cpf) {
+        Cliente cliente = servico.recuperar(cpf);
+        if (cliente == null) {
+            return Response.status(Response.Status.NO_CONTENT).build();
+        }
+        return Response.ok().entity(cliente).build();
     }
 
     @POST

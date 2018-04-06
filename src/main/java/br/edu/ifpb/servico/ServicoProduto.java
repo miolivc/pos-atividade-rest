@@ -1,4 +1,4 @@
-package br.edu.ifpb.servicos;
+package br.edu.ifpb.servico;
 
 import br.edu.ifpb.entidade.Produto;
 import br.edu.ifpb.repositorio.Produtos;
@@ -13,8 +13,8 @@ public class ServicoProduto {
     @Inject
     private Produtos produtos;
 
-    public void adicionar(Produto produto) {
-        produtos.adicionar(produto);
+    public Produto adicionar(Produto produto) {
+        return produtos.adicionar(produto);
     }
 
     public void remover(Produto produto) {
