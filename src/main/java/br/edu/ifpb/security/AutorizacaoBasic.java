@@ -1,0 +1,29 @@
+package br.edu.ifpb.security;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+public class AutorizacaoBasic {
+
+    public static String encode(String email, String password) throws UnsupportedEncodingException {
+        byte[] encodeParam = (email + ":" + password).getBytes("UTF-8");
+        String encode = Base64.getEncoder().encodeToString(encodeParam);
+        return encode;
+    }
+
+    public static String decode(String encode) {
+        byte[] decodeParams = Base64.getDecoder().decode(encode.replaceAll("Basic ", ""));
+
+        String emailWithPassword = new String(decodeParams);
+        StringTokenizer string = new StringTokenizer(emailWithPassword, ":");
+
+        String email = string.nextToken();
+        String password = string.nextToken();
+
+        return String.format("[%s, %s]", email, password);
+    }
+
+}
