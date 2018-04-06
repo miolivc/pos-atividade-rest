@@ -15,7 +15,6 @@ import java.util.List;
 
 @Stateless
 @Path("venda")
-@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class VendaRecurso {
 
 
@@ -26,6 +25,7 @@ public class VendaRecurso {
     private ServicoVenda servico;
 
     @GET
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response todosAsVendas(@Context UriInfo info) {
         List<Venda> vendas = servico.todos();
         if (vendas == null || vendas.isEmpty()) {
@@ -43,6 +43,7 @@ public class VendaRecurso {
 
     @GET
     @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response recuperarVenda(@Context UriInfo info, @PathParam("id") long id) {
         Venda venda = servico.recuperar(id);
         if (venda == null) {
@@ -54,6 +55,7 @@ public class VendaRecurso {
 
     @POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response criarVenda(@Context UriInfo info, Venda venda) {
         String id = String.valueOf(servico.adicionar(venda).getId());
         URI path = info.getAbsolutePathBuilder().path("venda").path(id).build();
@@ -63,6 +65,7 @@ public class VendaRecurso {
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response editarVenda(@PathParam("id") long id, Venda venda) {
         servico.editar(id, venda);
         return Response.status(204).build();
@@ -70,12 +73,13 @@ public class VendaRecurso {
 
     @DELETE
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response apagarVenda(Venda venda) {
         servico.remover(venda);
         return Response.status(204).build();
     }
 
-    @Path("{id}/produtos")
+    @Path("{idVenda}/produtos")
     public ProdutoVendaSubRecurso produtosDaVenda() {
         return resourceContext.getResource(ProdutoVendaSubRecurso.class);
     }

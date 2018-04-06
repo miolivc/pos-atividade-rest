@@ -8,10 +8,7 @@ import br.edu.ifpb.servico.ServicoVenda;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
-import javax.ws.rs.core.GenericEntity;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Stateless
 @Path("/")
@@ -35,8 +32,8 @@ public class ClienteVendaSubRecurso {
 
     @PUT
     @Path("{cpf}")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response adicionarProdutoVenda(@PathParam("id") long id, @PathParam("cpf") String cpf) {
+    public Response adicionarProdutoVenda(@PathParam("id") long id, 
+            @PathParam("cpf") String cpf) {
         Venda venda = servico.recuperar(id);
         Cliente cliente = clientes.recuperar(cpf);
 

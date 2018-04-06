@@ -24,8 +24,8 @@ public class ProdutoVendaSubRecurso {
     private ServicoProduto produtos;
 
     @GET
-    public Response todosOsProdutos(@PathParam("id") long id) {
-        List<Produto> prods = servico.recuperar(id).getProdutos();
+    public Response todosOsProdutos(@PathParam("idVenda") long idVenda) {
+        List<Produto> prods = servico.recuperar(idVenda).getProdutos();
         if (prods == null || prods.isEmpty()) {
             return Response.status(Response.Status.NO_CONTENT).build();
         }
@@ -36,13 +36,13 @@ public class ProdutoVendaSubRecurso {
 
     @PUT
     @Path("{idProduto}")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response adicionarProdutoVenda(@PathParam("id") long id, @PathParam("idProduto") long idProduto) {
-        Venda venda = servico.recuperar(id);
+    public Response adicionarProdutoVenda(@PathParam("idVenda") long idVenda, 
+            @PathParam("idProduto") long idProduto) {
+        Venda venda = servico.recuperar(idVenda);
         Produto produto = produtos.recuperar(idProduto);
 
         venda.addProduto(produto);
-        servico.editar(id, venda);
+        servico.editar(idVenda, venda);
 
         return Response.status(204).build();
     }

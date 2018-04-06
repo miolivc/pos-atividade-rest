@@ -16,10 +16,11 @@ import java.io.*;
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class UsuarioRecurso {
 
-    private File usuarios = new File("usuarios.txt");
+    private File usuarios = new File("src/main/resources/usuarios.txt");
 
     @POST
-    public Response criarUsuario(@FormParam("email") String email, @FormParam("senha") String senha) throws IOException {
+    public Response criarUsuario(@FormParam("email") String email,
+                @FormParam("senha") String senha) throws IOException {
 
         String usuario = String.format("[%s, %s]", email.toLowerCase(), senha.toLowerCase());
 
