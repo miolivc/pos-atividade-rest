@@ -1,17 +1,21 @@
 package br.edu.ifpb.security;
 
+import br.edu.ifpb.entidade.Usuario;
+import br.edu.ifpb.servico.ServicoUsuario;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 import java.io.*;
+import java.util.Map;
+import javax.inject.Inject;
 
 @Provider
 public class FiltroAutorizacao implements ContainerRequestFilter {
 
-    private File usuarios = new File("/home/miolivc/Development/pos-atividade-rest/src/main/resources/usuarios.txt");
-    private boolean autenticado = false;
+    @Inject
+    private ServicoUsuario usuarios;
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
@@ -21,24 +25,17 @@ public class FiltroAutorizacao implements ContainerRequestFilter {
         }
 
         String authHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
-        if (authHeader == null || authHeader.isEmpty() || (! authHeader.contains("Basic "))) {
+        if (authHeader == null || authHeader.isEmpty() || (!authHeader.contains("Basic "))) {
             requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
                     .entity("{'msg':'unauthorized'}")
                     .build());
         }
 
-        String decodeString = AutorizacaoBasic.decode(authHeader);
-
-        BufferedReader leitor = new BufferedReader(new FileReader(usuarios));
-        String usuario = leitor.readLine();
-        while (usuario != null) {
-            if (usuario.equalsIgnoreCase(decodeString)) {
-                autenticado = true;
-                break;
-            }
-        }
-
-        if (! autenticado) {
+        Map<String, String> decodeString = AutorizacaoBasic.decode(authHeader);
+        Usuario usuario = usuarios.recuperar(decodeString.get("email"));
+        
+        if (usuario != null && usuario.getEmail().equalsIgnoreCase(decodeString.get("email"))
+                && usuario.getSenha().equalsIgnoreCase(decodeString.get("senha"))) {
             requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
                     .entity("{'msg':'unauthorized'}")
                     .build());

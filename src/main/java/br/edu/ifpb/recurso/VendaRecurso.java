@@ -17,7 +17,6 @@ import java.util.List;
 @Path("venda")
 public class VendaRecurso {
 
-
     @Context
     private ResourceContext resourceContext;
 

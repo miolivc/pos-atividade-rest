@@ -14,7 +14,7 @@ public class AutorizacaoBasic {
         return encode;
     }
 
-    public static String decode(String encode) {
+    public static Map<String, String> decode(String encode) {
         byte[] decodeParams = Base64.getDecoder().decode(encode.replaceAll("Basic ", ""));
 
         String emailWithPassword = new String(decodeParams);
@@ -22,8 +22,12 @@ public class AutorizacaoBasic {
 
         String email = string.nextToken();
         String password = string.nextToken();
+        
+        Map<String, String> decode = new HashMap<>();
+        decode.put("email", email);
+        decode.put("password", password);
 
-        return String.format("[%s, %s]", email, password);
+        return decode;
     }
 
 }

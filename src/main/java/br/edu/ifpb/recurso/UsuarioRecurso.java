@@ -1,7 +1,9 @@
 package br.edu.ifpb.recurso;
 
 import br.edu.ifpb.configuracao.AppLogger;
+import br.edu.ifpb.entidade.Usuario;
 import br.edu.ifpb.security.AutorizacaoBasic;
+import br.edu.ifpb.servico.ServicoUsuario;
 import javax.ejb.Stateless;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -10,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.*;
+import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 
 @Stateless
@@ -18,26 +21,16 @@ import javax.interceptor.Interceptors;
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class UsuarioRecurso {
 
-    private File usuarios = new File("/home/miolivc/Development/pos-atividade-rest/src/main/resources/usuarios.txt");
+    @Inject
+    private ServicoUsuario usuarios;
 
     @POST
     public Response criarUsuario(@FormParam("email") String email,
                 @FormParam("senha") String senha) throws IOException {
 
-        String usuario = String.format("[%s, %s]", email.toLowerCase(), senha.toLowerCase());
-
-        BufferedReader leitor = new BufferedReader(new FileReader(usuarios));
-        String usuarioExistente = leitor.readLine();
-
-        while (usuarioExistente != null) {
-            if (usuario.equalsIgnoreCase(usuario)) {
-                Response.status(Response.Status.NOT_MODIFIED).build();
-            }
-        }
-
-        PrintWriter escritor = new PrintWriter(usuarios);
-        escritor.println(usuario);
-
+        Usuario usuario = Usuario.of(email, senha);
+        usuarios.adicionar(usuario);
+        
         String token = AutorizacaoBasic.encode(email, senha);
 
         return Response.ok()
