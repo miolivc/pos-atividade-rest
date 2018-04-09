@@ -5,8 +5,6 @@ import br.edu.ifpb.entidade.Produto;
 import br.edu.ifpb.entidade.Venda;
 import br.edu.ifpb.recurso.ClienteRecurso;
 import br.edu.ifpb.recurso.ProdutoRecurso;
-
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URI;
@@ -18,25 +16,31 @@ import java.io.Serializable;
 @XmlRootElement
 public class ModeloVenda implements Serializable {
 
+    private UriInfo info;
     private long id;
     private LocalDateTime criadoEm;
-    private Link cliente;
+    private Link cliente = new Link();
     private List<Link> produtos = new ArrayList<>();
     private double valor;
 
     public ModeloVenda(UriInfo info, Venda venda) {
+        this.info = info;
         this.id = venda.getId();
         this.criadoEm = venda.getCriadoEm();
         this.valor = venda.getValor();
-        this.cliente = linkCliente(info, venda.getCliente());
-        this.produtos = linkProdutos(info, venda.getProdutos());
+        if (venda.getCliente() != null) {
+            this.cliente = linkCliente(info, venda.getCliente());
+        }
+        if (venda.getProdutos() != null && ! venda.getProdutos().isEmpty()) {
+            this.produtos = linkProdutos(info, venda.getProdutos());
+        }
     }
 
     private Link linkCliente(UriInfo info, Cliente cliente) {
         URI localCliente = info.getBaseUriBuilder()
-                                .path(ClienteRecurso.class)
-                                .path(cliente.getCpf())
-                                .build();
+                .path(ClienteRecurso.class)
+                .path(cliente.getCpf())
+                .build();
 
         return new Link(cliente.getNome(), localCliente.toString());
     }
@@ -75,16 +79,16 @@ public class ModeloVenda implements Serializable {
         return cliente;
     }
 
-    public void setCliente(Link cliente) {
-        this.cliente = cliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = linkCliente(info, cliente);
     }
 
     public List<Link> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(List<Link> produtos) {
-        this.produtos = produtos;
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = linkProdutos(info, produtos);
     }
 
     public double getValor() {
