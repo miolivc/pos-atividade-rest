@@ -21,7 +21,7 @@ public class ModeloVenda implements Serializable {
     private long id;
     private LocalDateTime criadoEm;
     private Link cliente;
-    private List<Link> produtos;
+    private List<Link> produtos = new ArrayList<>();
     private double valor;
 
     public ModeloVenda(UriInfo info, Venda venda) {
