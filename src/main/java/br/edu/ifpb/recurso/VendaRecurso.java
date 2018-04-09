@@ -58,7 +58,7 @@ public class VendaRecurso {
     public Response criarVenda(@Context UriInfo info) {
         Venda venda = new Venda();
         String id = String.valueOf(servico.adicionar(venda).getId());
-        URI path = info.getAbsolutePathBuilder().path("venda").path(id).build();
+        URI path = info.getAbsolutePathBuilder().path(id).build();
         return Response.created(path).build();
     }
 

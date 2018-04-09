@@ -24,7 +24,7 @@ public class ModeloVenda implements Serializable {
     private List<Link> produtos;
     private double valor;
 
-    public ModeloVenda(@Context UriInfo info, Venda venda) {
+    public ModeloVenda(UriInfo info, Venda venda) {
         this.id = venda.getId();
         this.criadoEm = venda.getCriadoEm();
         this.valor = venda.getValor();

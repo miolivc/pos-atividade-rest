@@ -42,7 +42,7 @@ public class ProdutoRecurso {
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response criarProduto(@Context UriInfo info, Produto produto) {
         String id = String.valueOf(servico.adicionar(produto).getId());
-        URI path = info.getAbsolutePathBuilder().path("produto").path(id).build();
+        URI path = info.getAbsolutePathBuilder().path(id).build();
         return Response.created(path).build();
     }
 

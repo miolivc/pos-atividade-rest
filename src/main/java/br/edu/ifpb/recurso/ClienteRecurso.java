@@ -42,7 +42,7 @@ public class ClienteRecurso {
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response criarCliente(@Context UriInfo info, Cliente cliente) {
         String cpf = servico.adicionar(cliente).getCpf();
-        URI path = info.getAbsolutePathBuilder().path("cliente").path(cpf).build();
+        URI path = info.getAbsolutePathBuilder().path(cpf).build();
         return Response.created(path).build();
     }
 

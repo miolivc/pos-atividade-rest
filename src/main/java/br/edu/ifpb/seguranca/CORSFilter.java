@@ -1,4 +1,4 @@
-package br.edu.ifpb.security;
+package br.edu.ifpb.seguranca;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;

@@ -1,0 +1,8 @@
+
+FROM oracle/glassfish:5.0
+ENV LIB /glassfish5/glassfish/domains/domain1/lib/
+
+ADD /target/pos-atividade-rest/WEB-INF/lib/ ${LIB}
+
+ENV AUTODEPLOY /glassfish5/glassfish/domains/domain1/autodeploy
+COPY target/pos-atividade-rest.war $AUTODEPLOY

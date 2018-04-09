@@ -1,4 +1,4 @@
-package br.edu.ifpb.security;
+package br.edu.ifpb.seguranca;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;

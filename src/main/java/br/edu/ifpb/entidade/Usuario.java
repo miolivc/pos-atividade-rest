@@ -7,8 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 @Entity
+@XmlRootElement
 public class Usuario implements Serializable {
     
     @Id

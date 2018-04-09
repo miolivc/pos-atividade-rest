@@ -1,4 +1,4 @@
-package br.edu.ifpb.security;
+package br.edu.ifpb.seguranca;
 
 import br.edu.ifpb.entidade.Usuario;
 import br.edu.ifpb.servico.ServicoUsuario;
@@ -9,12 +9,14 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 import java.io.*;
 import java.util.Map;
-import javax.inject.Inject;
+import javax.ejb.EJB;
+import javax.ws.rs.container.PreMatching;
 
 @Provider
+@PreMatching
 public class FiltroAutorizacao implements ContainerRequestFilter {
 
-    @Inject
+    @EJB
     private ServicoUsuario usuarios;
 
     @Override
