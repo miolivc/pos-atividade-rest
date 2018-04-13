@@ -32,4 +32,12 @@ public class ServicoCliente {
     public List<Cliente> todos() {
         return clientes.recuperar();
     }
+    
+    public List<Cliente> iniciaComLetra(char letter) {
+        return clientes.comLetra(letter);
+    }
+
+    public Cliente comEmail(String email) {
+        return clientes.comEmail(email);
+    }
 }

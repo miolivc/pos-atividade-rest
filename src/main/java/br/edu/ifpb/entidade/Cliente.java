@@ -16,17 +16,21 @@ public class Cliente implements Serializable {
 
     @Column(length = 70, nullable = false)
     private String nome;
+    
+    @Column(length = 50)
+    private String email;
 
     public Cliente() {
     }
 
-    private Cliente(String cpf, String nome){
+    private Cliente(String cpf, String nome, String email){
         this.cpf = cpf;
         this.nome = nome;
+        this.email = email;
     }
 
-    public static Cliente of(String cpf, String nome) {
-        return new Cliente(cpf, nome);
+    public static Cliente of(String cpf, String nome, String email) {
+        return new Cliente(cpf, nome, email);
     }
 
     public String getCpf() {

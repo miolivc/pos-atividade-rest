@@ -38,4 +38,26 @@ public class Produtos {
         return manager.createQuery("SELECT p FROM Produto p", Produto.class)
                 .getResultList();
     }
+
+    public Produto recuperarPeloNome(String nome) {
+        return manager.createQuery("SELECT p FROM Produto p "
+                + "WHERE UPPPER(p.nome) = UPPPER(:nome)", Produto.class)
+                      .setParameter("nome", nome)
+                      .getSingleResult();
+    }
+
+    public List<Produto> recuperarDescricaoCom(String chave) {
+        return manager.createQuery("SELECT p FROM Produto p "
+                + "WHERE UPPPER(p.nome) LIKE '%UPPPER(:chave)%'", Produto.class)
+                      .setParameter("chave", chave)
+                      .getResultList();
+    }
+
+    public List<Produto> recuperarPrecoEntre(double inicio, double fim) {
+        return manager.createQuery("SELECT p FROM Produto p "
+                + "WHERE p.preco BETWEEN :inicio AND :fim", Produto.class)
+                      .setParameter("inicio", inicio)
+                      .setParameter("fim", fim)
+                      .getResultList();
+    }
 }

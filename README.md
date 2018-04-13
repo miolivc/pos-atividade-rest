@@ -18,8 +18,15 @@
     `POST /usuario, com form urlencoded email, senha`
 - Para acessar as demais páginas: 
     `Basic Token ` recebido ao criar o usuário no sistema.
-    
 
-
-
+**3. Link de acesso à API de consultas:**  http://localhost:8081/pos-atividade-rest/resource/consulta
+- **Clientes:** /cliente
+    - **por nome:** /nome/{nome}
+    - **por e-mail:** /email/{email}
+    - **por CPF:** /cpd/{cpf}
+- **Produtos:** /produto
+    - **por ID:** /id/{id}
+    - **por palavras contidas na descrição:** /descricao/{key}
+    - **por nome:** /nome/{nome}
+    - **por preço:** /preco?inicio={inicio}&fim={fim}
 

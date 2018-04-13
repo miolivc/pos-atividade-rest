@@ -2,7 +2,6 @@ package br.edu.ifpb.servico;
 
 import br.edu.ifpb.entidade.Produto;
 import br.edu.ifpb.repositorio.Produtos;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
@@ -31,5 +30,17 @@ public class ServicoProduto {
 
     public List<Produto> todos() {
         return produtos.recuperar();
+    }
+
+    public Produto porNome(String nome) {
+        return produtos.recuperarPeloNome(nome);
+    }
+    
+    public List<Produto> descricaoCom(String chave) {
+        return produtos.recuperarDescricaoCom(chave);
+    }
+
+    public List<Produto> precoEntre(double inicio, double fim) {
+        return produtos.recuperarPrecoEntre(inicio, fim);
     }
 }

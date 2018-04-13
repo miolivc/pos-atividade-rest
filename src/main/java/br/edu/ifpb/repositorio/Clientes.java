@@ -36,4 +36,18 @@ public class Clientes {
         return manager.createQuery("SELECT c FROM Cliente c", Cliente.class)
                 .getResultList();
     }
+
+    public List<Cliente> comLetra(char letter) {
+        return manager.createQuery("SELECT c FROM Cliente c"
+                + " WHERE UPPER(c.nome) LIKE 'UPPER(:letter)%'", Cliente.class)
+                .setParameter("letter", letter)
+                .getResultList();
+    }
+
+    public Cliente comEmail(String email) {
+        return manager.createQuery("SELECT c FROM Cliente c"
+                + " WHERE LOWER(c.email) = LOWER(:email)", Cliente.class)
+                .setParameter("email", email)
+                .getSingleResult();
+    }
 }
