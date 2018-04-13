@@ -23,7 +23,7 @@ public class ClienteConsultaResource {
     private ServicoCliente clientes;
     
     @GET
-    @Path("letra/{letter}")
+    @Path("nome/{letter}")
     public Response clientesLetraNome(@PathParam("letter") String letter) {
         List<Cliente> matchs = clientes.iniciaComLetra(letter);
 

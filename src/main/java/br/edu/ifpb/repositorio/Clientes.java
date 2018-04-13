@@ -1,7 +1,6 @@
 package br.edu.ifpb.repositorio;
 
 import br.edu.ifpb.entidade.Cliente;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -40,7 +39,7 @@ public class Clientes {
 
     public List<Cliente> comLetra(String letter) {
         return manager.createQuery("SELECT c FROM Cliente c"
-                + " WHERE UPPER(c.nome) LIKE 'UPPER(:letter)%'", Cliente.class)
+                + " WHERE UPPER(c.nome) LIKE CONCAT('', UPPER(:letter), '%')", Cliente.class)
                 .setParameter("letter", letter)
                 .getResultList();
     }
