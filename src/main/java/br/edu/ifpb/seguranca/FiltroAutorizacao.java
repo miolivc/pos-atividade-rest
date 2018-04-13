@@ -36,8 +36,8 @@ public class FiltroAutorizacao implements ContainerRequestFilter {
         Map<String, String> decodeString = AutorizacaoBasic.decode(authHeader);
         Usuario usuario = usuarios.recuperar(decodeString.get("email"));
         
-        if (usuario != null && usuario.getEmail().equalsIgnoreCase(decodeString.get("email"))
-                && usuario.getSenha().equalsIgnoreCase(decodeString.get("senha"))) {
+        if (usuario != null || ! usuario.getEmail().equalsIgnoreCase(decodeString.get("email"))
+                || ! usuario.getSenha().equalsIgnoreCase(decodeString.get("senha"))) {
             requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
                     .entity("{'msg':'unauthorized'}")
                     .build());
