@@ -23,10 +23,10 @@
 - **Clientes:** /cliente
     - **por nome:** /nome/{nome}
     - **por e-mail:** /email/{email}
-    - **por CPF:** /cpd/{cpf}
+    - **por CPF:** /cpf/{cpf}
 - **Produtos:** /produto
     - **por ID:** /id/{id}
-    - **por palavras contidas na descrição:** /descricao/{key}
-    - **por nome:** /nome/{nome}
+    - **por palavras contidas na descrição:** /descricao?chave={chave}
+    - **por nome:** /nome?produto={nome}
     - **por preço:** /preco?inicio={inicio}&fim={fim}
 

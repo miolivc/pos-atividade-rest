@@ -33,8 +33,8 @@ public class ProdutoConsultaResource {
     }
 
     @GET
-    @Path("descricao/{chave}")
-    public Response descricaoContem(@PathParam("nome") String chave) {
+    @Path("descricao")
+    public Response descricaoContem(@QueryParam("chave") String chave) {
         List<Produto> matchs = produtos.descricaoCom(chave);
 
         if (matchs == null || matchs.isEmpty()) {
@@ -46,8 +46,8 @@ public class ProdutoConsultaResource {
     }
 
     @GET
-    @Path("nome/{nome}")
-    public Response comNome(@PathParam("nome") String nome) {
+    @Path("nome")
+    public Response comNome(@QueryParam("produto") String nome) {
         Produto match = produtos.porNome(nome);
 
         if (match == null) {

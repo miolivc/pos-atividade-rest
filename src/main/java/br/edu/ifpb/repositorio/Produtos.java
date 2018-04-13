@@ -41,14 +41,14 @@ public class Produtos {
 
     public Produto recuperarPeloNome(String nome) {
         return manager.createQuery("SELECT p FROM Produto p "
-                + "WHERE UPPPER(p.nome) = UPPPER(:nome)", Produto.class)
+                + "WHERE UPPER(p.nome) LIKE UPPER(:nome)", Produto.class)
                       .setParameter("nome", nome)
                       .getSingleResult();
     }
 
     public List<Produto> recuperarDescricaoCom(String chave) {
         return manager.createQuery("SELECT p FROM Produto p "
-                + "WHERE UPPPER(p.nome) LIKE '%UPPPER(:chave)%'", Produto.class)
+                + "WHERE UPPER(p.descricao) LIKE CONCAT('%', UPPER(:chave), '%')", Produto.class)
                       .setParameter("chave", chave)
                       .getResultList();
     }
