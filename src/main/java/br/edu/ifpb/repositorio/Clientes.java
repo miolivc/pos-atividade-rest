@@ -25,6 +25,7 @@ public class Clientes {
     public void editar(String cpf, Cliente cliente) {
         Cliente editado = manager.find(Cliente.class, cpf);
         editado.setNome(cliente.getNome());
+        editado.setEmail(cliente.getEmail());
         manager.merge(editado);
     }
 
@@ -37,7 +38,7 @@ public class Clientes {
                 .getResultList();
     }
 
-    public List<Cliente> comLetra(char letter) {
+    public List<Cliente> comLetra(String letter) {
         return manager.createQuery("SELECT c FROM Cliente c"
                 + " WHERE UPPER(c.nome) LIKE 'UPPER(:letter)%'", Cliente.class)
                 .setParameter("letter", letter)

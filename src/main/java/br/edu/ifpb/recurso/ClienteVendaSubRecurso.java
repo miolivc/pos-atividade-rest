@@ -39,7 +39,7 @@ public class ClienteVendaSubRecurso {
         venda.setCliente(cliente);
         servico.editar(id, venda);
 
-        return Response.status(204).build();
+        return Response.status(200).build();
     }
 
 }

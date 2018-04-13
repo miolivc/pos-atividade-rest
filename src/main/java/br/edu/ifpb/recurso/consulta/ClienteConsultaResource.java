@@ -24,7 +24,7 @@ public class ClienteConsultaResource {
     
     @GET
     @Path("letra/{letter}")
-    public Response clientesLetraNome(@PathParam("letter") char letter) {
+    public Response clientesLetraNome(@PathParam("letter") String letter) {
         List<Cliente> matchs = clientes.iniciaComLetra(letter);
 
         if (matchs == null || matchs.isEmpty()) {

@@ -49,16 +49,17 @@ public class ClienteRecurso {
     @PUT
     @Path("{cpf}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response editarCliente(@PathParam("cpf") String cpf, Cliente cliente) {
+    public Response editarCliente(@PathParam("cpf") String cpf,
+            Cliente cliente) {
         servico.editar(cpf, cliente);
-        return Response.status(204).build();
+        return Response.status(200).build();
     }
 
     @DELETE
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response apagarCliente(Cliente cliente) {
         servico.remover(cliente);
-        return Response.status(204).build();
+        return Response.status(200).build();
     }
 
 }

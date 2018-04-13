@@ -68,7 +68,7 @@ public class VendaRecurso {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response editarVenda(@PathParam("id") long id, Venda venda) {
         servico.editar(id, venda);
-        return Response.status(204).build();
+        return Response.status(200).build();
     }
 
     @DELETE
@@ -76,7 +76,7 @@ public class VendaRecurso {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response apagarVenda(Venda venda) {
         servico.remover(venda);
-        return Response.status(204).build();
+        return Response.status(200).build();
     }
 
     @Path("{idVenda}/produtos")

@@ -33,7 +33,7 @@ public class ServicoCliente {
         return clientes.recuperar();
     }
     
-    public List<Cliente> iniciaComLetra(char letter) {
+    public List<Cliente> iniciaComLetra(String letter) {
         return clientes.comLetra(letter);
     }
 

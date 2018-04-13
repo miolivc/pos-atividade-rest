@@ -51,14 +51,14 @@ public class ProdutoRecurso {
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response editarProduto(@PathParam("id") long id, Produto produto) {
         servico.editar(id, produto);
-        return Response.status(204).build();
+        return Response.status(200).build();
     }
 
     @DELETE
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response apagarProduto(Produto produto) {
         servico.remover(produto);
-        return Response.status(204).build();
+        return Response.status(200).build();
     }
 
 }

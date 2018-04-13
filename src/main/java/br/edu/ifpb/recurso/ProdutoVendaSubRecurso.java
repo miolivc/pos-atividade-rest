@@ -44,7 +44,7 @@ public class ProdutoVendaSubRecurso {
         venda.addProduto(produto);
         servico.editar(idVenda, venda);
 
-        return Response.status(204).build();
+        return Response.status(200).build();
     }
 
 }
